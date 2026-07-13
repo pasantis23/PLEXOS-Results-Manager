@@ -1,0 +1,61 @@
+# Parámetros base de la app PLEXOS - Streamlit
+# Ajustar rutas antes de ejecutar en modo REAL.
+
+plexos:
+  api_path: "C:/Program Files/Energy Exemplar/PLEXOS 11.0 API/"
+  sample_default: "mean"
+  simulation_phase: "LTPlan"
+  period_yearly: "FiscalYear"
+  period_hourly: "Interval"
+  series_type: "Values"
+
+rutas:
+  # Carpeta raíz donde la app buscará archivos Solution.zip.
+  base_dir: ""
+  # Carpeta donde se guardan los archivos generados. Puede ser relativa o absoluta.
+  output_dir: "workspace/outputs"
+  custom_queries_dir: "workspace/outputs/custom_queries"
+
+  # Opcional para Capacidad instalada.
+  # Debe tener una columna Central. Si existen, se agregan Tipo, Estado, Nodo Opt y Tipo 2.
+  diccionario_centrales: ""
+  hoja_diccionario_centrales: "Centrales_Bdatos_2026"
+
+  # Opcional para Optimización de transmisión.
+  # Debe tener una columna Línea o LineName. Si existen, se agregan Max Flow, Tipo, Zona, Regional y VI (MMUSD).
+  diccionario_lineas: ""
+  hoja_diccionario_lineas: "Cap_Tx"
+
+procesamiento:
+  # Puede ser un año único o una lista. En la app también se aceptan rangos, por ejemplo 2030-2035.
+  anios_default: [2030]
+
+  # Deben coincidir exactamente con los nombres de samples disponibles en PLEXOS.
+  # Ejemplo real usado en la app: ["mean", "sample 1", "sample 2"]
+  samples_default: ["mean", "sample 1", "sample 2"]
+
+  # Exportación automática.
+  umbral_csv_filas: 500000
+
+  # Optimización de transmisión - Units.
+  umbral_tx_units: 0.3
+  categoria_tx_units: "Sistema-Tx-Evaluacion_Opt"
+  piso_tx_zonal: 2030
+  piso_tx_interregional: 2032
+  tx_parent_object: "SING-SIC"
+  tx_plexos_category: "Transmission Expansion"
+  tx_scenario_prefix: "9_PlanOptimoTx"
+
+  fecha_inicio_default: "01-01-{year}"
+  fecha_fin_default: "31-12-{year}"
+
+nombres:
+  archivo_costos: "Analisis_costos"
+  archivo_generacion_anual: "Generacion_Anual_{years}"
+  archivo_curtailment_anual: "Curtailed_Energy_Anual_{years}"
+  archivo_generacion_horaria: "Gen_Horaria_{years}"
+  archivo_capacidad: "Cap_Inst_caso_{years}"
+  archivo_load: "Load_PO_2026_{years}"
+  archivo_tx_plan: "Plan_Tx_caso_A_2026_{years}"
+  archivo_tx_flow: "Tx_Flow_{years}"
+  archivo_restricciones: "Restricciones_{years}"
